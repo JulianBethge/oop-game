@@ -2,11 +2,28 @@
 class Game {
     constructor(){
         this.player = null; //will store an instance of the class Player
+        this.obstacles = []; //will store instances of the class Obstacle
     }
+
     start(){
         this.player = new Player();
         this.attachEventListeners();
+        
+        //moving obstacles
+        setInterval(() => {
+            this.obstacles.forEach( (obstacleInstance) => {
+                obstacleInstance.moveDown();
+            });
+        }, 60);
+
+        //create obstacle
+        setInterval(() => {
+            //create new obstacle
+            const newObstacle = new Obstacle();
+            this.obstacles.push(newObstacle);
+        }, 3000);
     }
+
     attachEventListeners(){
         document.addEventListener("keydown", (event) => {
             if(event.key === "ArrowLeft"){
@@ -48,16 +65,49 @@ class Player {
         boardElm.appendChild(this.domElement)
     }
     moveLeft(){
-        this.positionX--;
-        const newDiv = document.getElementById("player");
-        this.domElement.style.left = this.positionX + "vw";
+        if (this.positionX > 0){
+            this.positionX -= 2;
+            this.domElement.style.left = this.positionX + "vw";
+        }
+        
         
     }
     moveRight(){
-        console.log("moving right....");
-        this.positionX++;
-        const newDiv = document.getElementById("player");
+        if (this.positionX < (100-this.width)){
+            this.positionX += 2;
+            this.domElement.style.left = this.positionX + "vw";
+        }
+    }
+}
+
+class Obstacle {
+    constructor(){
+        this.positionX = 50;
+        this.positionY = 100;
+        this.width = 10;
+        this.height = 10;
+        this.domElement = null;
+
+        this.createDomElement();
+    }
+    createDomElement(){
+        // create dom element
+        this.domElement = document.createElement('div');
+
+        // set id and css
+        this.domElement.className = "obstacle";
+        this.domElement.style.width = this.width + "vw";
+        this.domElement.style.height = this.height + "vh";
+        this.domElement.style.bottom = this.positionY + "vh";
         this.domElement.style.left = this.positionX + "vw";
+
+        // append to the dom
+        const boardElm = document.getElementById("board");
+        boardElm.appendChild(this.domElement)
+    }
+    moveDown(){
+        this.positionY--;
+        this.domElement.style.bottom = this.positionY + "vw";
     }
 }
 

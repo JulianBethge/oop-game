@@ -7,9 +7,16 @@ body {
     background-color:rgb(186, 204, 206);
     height: 100vh;
     position: relative;
+    background-image: url("https://www.publicdomainpictures.net/pictures/60000/nahled/clouds-sky-blue-earth-backdrop.jpg");
+    background-size: cover;
 }
 
 #player {
     background-color: rgb(255, 0, 166);
+    position: absolute;
+}
+
+.obstacle {
+    background-color: rgb(90, 19, 156);
     position: absolute;
 }
