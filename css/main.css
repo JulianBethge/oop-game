@@ -1,3 +1,15 @@
-h1 {
-    color:green;
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#board {
+    background-color:rgb(186, 204, 206);
+    height: 100vh;
+    position: relative;
+}
+
+#player {
+    background-color: rgb(255, 0, 166);
+    position: absolute;
 }
