@@ -19,30 +19,10 @@ class Game {
         //move obstacles
         setInterval(() => {
             this.obstacles.forEach( (obstacleInstance) => {
-
-                //move
-                obstacleInstance.moveDown();
-
-                //detect collision
-                if (
-                    this.player.positionX < obstacleInstance.positionX + obstacleInstance.width &&
-                    this.player.positionX + this.player.width > obstacleInstance.positionX &&
-                    this.player.positionY < obstacleInstance.positionY + obstacleInstance.height &&
-                    this.player.height + this.player.positionY > obstacleInstance.positionY
-                ) {
-                    location.href = 'gameover.html';
-                    // console.log("game over");
-                }
-
-                //remove old obstacles
                 
-                if(obstacleInstance.positionY < 0){
-                    console.log("remove old obs.");
-                    obstacleInstance.domElement.remove(); // remove from the dom
-                    this.obstacles.shift(); // remove from the array
-                    console.log(this.obstacles);
-
-                }
+                obstacleInstance.moveDown(); //move
+                this.detectCollision(obstacleInstance); //detect collision with current obstacle
+                this.removeObstacleIfOutside(obstacleInstance); //check if we need to remove current obstacle
 
             });
         }, 60);
@@ -60,6 +40,28 @@ class Game {
             }
         });
     }
+
+    detectCollision(obstacleInstance){
+        if (
+            this.player.positionX < obstacleInstance.positionX + obstacleInstance.width &&
+            this.player.positionX + this.player.width > obstacleInstance.positionX &&
+            this.player.positionY < obstacleInstance.positionY + obstacleInstance.height &&
+            this.player.height + this.player.positionY > obstacleInstance.positionY
+        ) {
+            console.log("game over....")
+            location.href = 'gameover.html';
+        }
+    }
+
+    removeObstacleIfOutside(obstacleInstance){
+        if(obstacleInstance.positionY < 0){
+            obstacleInstance.domElement.remove(); //remove from the dom
+            this.obstacles.shift(); // remove from the array
+        }
+    }
+
+
+
 }
 
 
