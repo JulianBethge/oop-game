@@ -9,6 +9,7 @@ body {
     position: relative;
     background-image: url("https://www.publicdomainpictures.net/pictures/60000/nahled/clouds-sky-blue-earth-backdrop.jpg");
     background-size: cover;
+    overflow: hidden;
 }
 
 #player {

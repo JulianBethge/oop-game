@@ -31,6 +31,17 @@ class Game {
                     this.player.height + this.player.positionY > obstacleInstance.positionY
                 ) {
                     location.href = 'gameover.html';
+                    // console.log("game over");
+                }
+
+                //remove old obstacles
+                
+                if(obstacleInstance.positionY < 0){
+                    console.log("remove old obs.");
+                    obstacleInstance.domElement.remove(); // remove from the dom
+                    this.obstacles.shift(); // remove from the array
+                    console.log(this.obstacles);
+
                 }
 
             });
