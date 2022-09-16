@@ -65,6 +65,7 @@ class Game {
 }
 
 
+
 class Player {
     constructor(){
         this.width = 20;
